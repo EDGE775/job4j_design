@@ -24,10 +24,9 @@ public class EvenIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        if (hasNext()) {
-            return numbers[index++];
-        } else {
+        if (!hasNext()) {
             throw new NoSuchElementException();
         }
+        return numbers[index++];
     }
 }
