@@ -23,7 +23,6 @@ public class ListUtils {
         while (i.hasNext()) {
             if (i.nextIndex() == index) {
                 i.next();
-                i.nextIndex();
                 i.add(value);
                 break;
             }
