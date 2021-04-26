@@ -9,6 +9,7 @@ public class SimpleMap<K, V> implements Iterable<K> {
     private Object[] storage;
     private int size = 0;
     private int modCount = 0;
+    private final float loadFactor = 0.75F;
 
     public SimpleMap(int capacity) {
         this.storage = new Object[capacity];
@@ -19,7 +20,7 @@ public class SimpleMap<K, V> implements Iterable<K> {
     }
 
     public boolean insert(K key, V value) {
-        if (storage.length == size) {
+        if (storage.length * loadFactor == size) {
             growUp();
         }
         int newHash = hash(key);
@@ -41,15 +42,14 @@ public class SimpleMap<K, V> implements Iterable<K> {
     public V get(K key) {
         int hash = hash(key);
         int index = getIndex(hash);
-        Objects.checkIndex(index, storage.length);
         Node<K, V> node = (Node<K, V>) storage[index];
-        return node == null ? null : node.getValue();
+        return node == null || !Objects.equals(key, node.getKey())
+                ? null : node.getValue();
     }
 
     public boolean delete(K key) {
         int hash = hash(key);
         int index = getIndex(hash);
-        Objects.checkIndex(index, storage.length);
         if (storage[index] == null || !((Node<K, V>) storage[index]).getKey().equals(key)) {
             return false;
         }
