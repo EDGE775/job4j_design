@@ -92,14 +92,10 @@ public class SimpleMap<K, V> implements Iterable<K> {
 
             @Override
             public boolean hasNext() {
-                while (index < storage.length) {
-                    if (storage[index] == null) {
-                        index++;
-                    } else {
-                        return true;
-                    }
+                while (index < storage.length && storage[index] == null) {
+                    index++;
                 }
-                return false;
+                return index < storage.length;
             }
 
             @Override
