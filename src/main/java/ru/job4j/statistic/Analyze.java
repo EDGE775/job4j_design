@@ -13,17 +13,19 @@ public class Analyze {
         int changedUsers;
         int addedUsers;
         int deletedUsers;
+        Set<User> previousSet = Set.copyOf(previous);
+        Set<User> currentSet = Set.copyOf(current);
         Set<User> allUsers = Stream
-                .concat(previous.stream(), current.stream())
+                .concat(previousSet.stream(), currentSet.stream())
                 .collect(Collectors.toSet());
         int unicsNumbers = allUsers.stream().map(x -> x.id).collect(Collectors.toSet()).size();
         changedUsers = Math.abs(allUsers.size() - unicsNumbers);
         int deleted = 0;
         int added = 0;
         for (User user : allUsers) {
-            if (previous.contains(user) && current.contains(user)) {
+            if (previousSet.contains(user) && currentSet.contains(user)) {
                 continue;
-            } else if (previous.contains(user)) {
+            } else if (previousSet.contains(user)) {
                 deleted++;
             } else {
                 added++;
