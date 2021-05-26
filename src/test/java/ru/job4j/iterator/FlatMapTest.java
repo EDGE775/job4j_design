@@ -83,7 +83,7 @@ public class FlatMapTest {
                 List.of().iterator(),
                 List.of().iterator()
         ).iterator();
-        FlatMap flat = new FlatMap(it);
+        FlatMap<Iterator<Object>> flat = new FlatMap(it);
         assertFalse(flat.hasNext());
     }
 }
