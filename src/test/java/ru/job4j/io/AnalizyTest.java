@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import java.io.*;
-import java.util.List;
 
 public class AnalizyTest {
     @Rule
@@ -16,7 +15,7 @@ public class AnalizyTest {
 
     @Test
     public void unavailableTest1() throws IOException {
-        String sourseFile = "./data/server_test_1.log";
+        String sourseFile = "./src/test/data/server_test_1.log";
         File targetFile = folder.newFile("target.txt");
         Analizy analizy = new Analizy();
         analizy.unavailable(sourseFile, targetFile.getAbsolutePath());
@@ -29,7 +28,7 @@ public class AnalizyTest {
 
     @Test
     public void unavailableTest2() throws IOException {
-        String sourseFile = "./data/server_test_2.log";
+        String sourseFile = "./src/test/data/server_test_2.log";
         File targetFile = folder.newFile("target.txt");
         Analizy analizy = new Analizy();
         analizy.unavailable(sourseFile, targetFile.getAbsolutePath());
