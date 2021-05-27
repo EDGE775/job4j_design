@@ -1,21 +1,14 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Analizy {
     public void unavailable(String source, String target) {
-        List<String> log = new ArrayList<>();
-        try (BufferedReader read = new BufferedReader(new FileReader(source))) {
-            read.lines().forEach(log::add);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
+        try (BufferedReader read = new BufferedReader(new FileReader(source));
+             PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
             boolean available = true;
-            for (String logItem : log) {
-                String[] keyValue = logItem.split(" ");
+            for (String line = read.readLine(); line != null; line = read.readLine()) {
+                String[] keyValue = line.split(" ");
                 if (Integer.parseInt(keyValue[0]) > 300 && available) {
                     out.printf("%s;", keyValue[1]);
                     available = false;
