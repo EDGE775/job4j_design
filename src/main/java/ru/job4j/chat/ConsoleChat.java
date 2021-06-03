@@ -36,23 +36,26 @@ public class ConsoleChat {
      * Метод для запуска чат бота
      */
     public void run() {
-        String question = in.nextLine();
-        writeLogFile(question);
-        if (question.toLowerCase().equals(CONTINUE)) {
-            flag = true;
-        } else if (question.toLowerCase().equals(STOP)) {
-            flag = false;
-        } else if (question.toLowerCase().equals(OUT)) {
-            return;
-        } else if (flag) {
-            String botAnswer = getBotAnswer();
-            System.out.println(botAnswer);
-            writeLogFile(botAnswer);
+        List<String> answers = parseBotAnswers();
+        List<String> log = new ArrayList<>();
+        String question = "";
+        while (!question.toLowerCase().equals(OUT)) {
+            question = in.nextLine();
+            log.add(question);
+            if (question.toLowerCase().equals(CONTINUE)) {
+                flag = true;
+            } else if (question.toLowerCase().equals(STOP)) {
+                flag = false;
+            } else if (flag && !question.toLowerCase().equals(OUT)) {
+                String botAnswer = getBotAnswer(answers);
+                System.out.println(botAnswer);
+                log.add(botAnswer);
+            }
         }
-        run();
+        writeLogFile(log);
     }
 
-    private String getBotAnswer() {
+    private List<String> parseBotAnswers() {
         List<String> answers = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(
                 new FileReader(botAnswers))) {
@@ -60,14 +63,18 @@ public class ConsoleChat {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return answers;
+    }
+
+    private String getBotAnswer(List<String> answers) {
         Random random = new Random();
         return answers.get(random.nextInt(answers.size()));
     }
 
-    private void writeLogFile(String text) {
+    private void writeLogFile(List<String> log) {
         try (PrintWriter printWriter = new PrintWriter(
                 new FileWriter(path, StandardCharsets.UTF_8, true))) {
-            printWriter.println(text);
+            log.forEach(printWriter::println);
         } catch (IOException e) {
             e.printStackTrace();
         }
