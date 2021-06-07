@@ -17,12 +17,18 @@ public class EchoServer {
                         System.out.println(str);
                         if (str.startsWith("GET")) {
                             String parameter = str.split(" ")[1].split("=")[1];
-                            if (parameter.equals("Bye")) {
+                            if (parameter.equals("Bye") || parameter.equals("Exit")) {
+                                out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                                 server.close();
+                            } else if (parameter.equals("Hello")) {
+                                out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                                out.write("Hello, dear friend.\n".getBytes());
+                            } else {
+                                out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                                out.write(String.format("%s%n", parameter).getBytes());
                             }
                         }
                     }
-                    out.write("HTTP/1.1 200 OK\r\n".getBytes());
                 }
             }
         }
