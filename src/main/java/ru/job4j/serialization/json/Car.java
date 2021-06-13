@@ -2,6 +2,7 @@ package ru.job4j.serialization.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -22,6 +23,26 @@ public class Car {
         this.details = details;
     }
 
+    public String getModel() {
+        return model;
+    }
+
+    public boolean isRoofRack() {
+        return roofRack;
+    }
+
+    public int getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    public CarPasport getCarPasport() {
+        return carPasport;
+    }
+
+    public String[] getDetails() {
+        return details;
+    }
+
     @Override
     public String toString() {
         return "Car{"
@@ -36,10 +57,17 @@ public class Car {
     public static void main(String[] args) {
         Car car = new Car("Ford", false, 140,
                 new CarPasport("123456789"), new String[]{"Engine", "Wheel"});
+
+        //      Создание json с помощью библиотеки Gson и обратно
         Gson gson = new GsonBuilder().create();
         String jsonCar = gson.toJson(car);
         System.out.println(jsonCar);
         Car carFromJson = gson.fromJson(jsonCar, Car.class);
         System.out.println(carFromJson);
+        System.out.println();
+
+        //        Создание json с помощью библиотеки org.json
+        JSONObject jsonObject = new JSONObject(car);
+        System.out.println(jsonObject);
     }
 }

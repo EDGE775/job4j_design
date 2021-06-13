@@ -7,6 +7,10 @@ public class CarPasport {
         this.serialNumber = serialNumber;
     }
 
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
     @Override
     public String toString() {
         return "CarPasport{"
