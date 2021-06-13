@@ -1,0 +1,10 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<!-- Объект представляет собой машину -->
+<car model="Ford" maxSpeed="140">
+    <roofRack>false</roofRack>
+    <carPasport serialNumber="123456789"/>
+    <details>
+        <detail>Engine</detail>
+        <detail>Wheel</detail>
+    </details>
+</car>
