@@ -1,0 +1,1 @@
+update cars set maxspeed = '150';
