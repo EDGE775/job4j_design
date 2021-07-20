@@ -1,0 +1,1 @@
+select * from product as p where current_date > p.expired_date;

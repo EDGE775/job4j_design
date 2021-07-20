@@ -1,0 +1,1 @@
+select * from product as p where p.name ilike '%мороженое%';
