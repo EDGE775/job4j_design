@@ -1,0 +1,1 @@
+select * from emploees as e cross join departments as d;
