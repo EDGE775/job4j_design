@@ -1,2 +1,2 @@
 [![Build Status](https://travis-ci.com/EDGE775/job4j_design.svg?branch=master)](https://travis-ci.com/EDGE775/job4j_design)
-[![codecov](https://codecov.io/gh/EDGE775/job4j_design/branch/master/graph/badge.svg)](https://codecov.io/gh/EDGE775/job4j_design)
+[![codecov](https://codecov.io/gh/EDGE775/job4j_design/branch/master/graph/badge.svg?token=LO373W0B59)](https://codecov.io/gh/EDGE775/job4j_design)
